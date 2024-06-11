@@ -1,0 +1,7 @@
+Zeek is a cli application . and to run all zeek offline logs instead on acli wecan use zui formarly known as  brim wj=hich is agui specifically made to run zeek logs. 
+
+Zeek relies primarily on its extensive scripting language for defining and analyzing detection policies, but it also provides an independent signature language for doing low-level, Snort-style pattern matching. While signatures are not Zeek’s preferred detection tool, they sometimes come in handy and are closer to what many people are familiar with from using other NIDS.
+
+by using brim it automaticlaly does all the signature work.
+ 
+
