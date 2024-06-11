@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zeek Setup &mdash; Zeek Documenation 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Zeek Documenation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Zeek Setup</a><ul>
+<li><a class="reference internal" href="#change-privileges">1. Change Privileges</a></li>
+<li><a class="reference internal" href="#update-and-upgrade-apt">2. Update and Upgrade Apt</a></li>
+<li><a class="reference internal" href="#install-binary-packages">3. Install Binary Packages</a></li>
+<li><a class="reference internal" href="#add-zeek-repository-and-install">4. Add Zeek Repository and Install</a></li>
+<li><a class="reference internal" href="#export-zeek-path-to-bashrc">5. Export Zeek Path to .bashrc</a></li>
+<li><a class="reference internal" href="#verify-zeek-installation">6. Verify Zeek Installation</a></li>
+<li><a class="reference internal" href="#check-zeek-status-and-logs">7. Check Zeek Status and Logs</a></li>
+<li><a class="reference internal" href="#monitor-logs">8. Monitor Logs</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Zeek Documenation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Zeek Setup</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zeek-setup">
+<h1>Zeek Setup<a class="headerlink" href="#zeek-setup" title="Link to this heading"></a></h1>
+<p>To run Zeek on Linux, throughout this documentation I will be using Ubuntu, a distribution of Linux, on my VMware.</p>
+<p>Install Zeek and get it up and running by following these steps:</p>
+<section id="change-privileges">
+<h2>1. Change Privileges<a class="headerlink" href="#change-privileges" title="Link to this heading"></a></h2>
+<p>First of all, change your privileges to root:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>su
+</pre></div>
+</div>
+</section>
+<section id="update-and-upgrade-apt">
+<h2>2. Update and Upgrade Apt<a class="headerlink" href="#update-and-upgrade-apt" title="Link to this heading"></a></h2>
+<p>Update all packages:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>apt-get<span class="w"> </span>update
+$<span class="w"> </span>apt-get<span class="w"> </span>upgrade
+</pre></div>
+</div>
+</section>
+<section id="install-binary-packages">
+<h2>3. Install Binary Packages<a class="headerlink" href="#install-binary-packages" title="Link to this heading"></a></h2>
+<p>Install necessary packages:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>g++<span class="w"> </span>cmake<span class="w"> </span>make<span class="w"> </span>libpcap-dev
+</pre></div>
+</div>
+<p>These packages include <code class="docutils literal notranslate"><span class="pre">g++</span></code> for compilation, <code class="docutils literal notranslate"><span class="pre">cmake</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span></code> as build tools, and <code class="docutils literal notranslate"><span class="pre">libpcap-dev</span></code> to build against Zeek headers. You’ll also need these dependencies for Spicy’s JIT compilation.</p>
+</section>
+<section id="add-zeek-repository-and-install">
+<h2>4. Add Zeek Repository and Install<a class="headerlink" href="#add-zeek-repository-and-install" title="Link to this heading"></a></h2>
+<p>Add Zeek repository and install:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;deb http://download.opensuse.org/repositories/security:/zeek/xUbuntu_22.04/ /&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/security:zeek.list
+$<span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://download.opensuse.org/repositories/security:zeek/xUbuntu_22.04/Release.key<span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/trusted.gpg.d/security_zeek.gpg<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>zeek-6.0
+</pre></div>
+</div>
+</section>
+<section id="export-zeek-path-to-bashrc">
+<h2>5. Export Zeek Path to .bashrc<a class="headerlink" href="#export-zeek-path-to-bashrc" title="Link to this heading"></a></h2>
+<p>Export Zeek path to <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PATH=/opt/zeek/bin:$PATH&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+</section>
+<section id="verify-zeek-installation">
+<h2>6. Verify Zeek Installation<a class="headerlink" href="#verify-zeek-installation" title="Link to this heading"></a></h2>
+<p>To check where Zeek is located:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>which<span class="w"> </span>zeek
+</pre></div>
+</div>
+<p>To check Zeek version:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>zeek<span class="w"> </span>--version
+</pre></div>
+</div>
+</section>
+<section id="check-zeek-status-and-logs">
+<h2>7. Check Zeek Status and Logs<a class="headerlink" href="#check-zeek-status-and-logs" title="Link to this heading"></a></h2>
+<p>Check Zeek status and logs:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/downloads/zeek/bin
+$<span class="w"> </span>./zeekctl
+$<span class="w"> </span>./zeekctcl<span class="w"> </span>check
+$<span class="w"> </span>./zeekctcl<span class="w"> </span>start
+$<span class="w"> </span>./zeekctcl<span class="w"> </span>deploy
+$<span class="w"> </span>./zeekctcl<span class="w"> </span>status
+</pre></div>
+</div>
+</section>
+<section id="monitor-logs">
+<h2>8. Monitor Logs<a class="headerlink" href="#monitor-logs" title="Link to this heading"></a></h2>
+<p>Monitor logs:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/downloads/zeek/logs
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">tail</span> <span class="pre">-f</span></code> to monitor logs. For example:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>conn.log
+</pre></div>
+</div>
+<p>This command will continuously display updates in the <code class="docutils literal notranslate"><span class="pre">conn.log</span></code> file.</p>
+<p>By following these steps, you should have Zeek installed, configured, and running on your system. For further details and documentation, you can refer to the official Zeek documentation available online.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Laiba Waseem.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

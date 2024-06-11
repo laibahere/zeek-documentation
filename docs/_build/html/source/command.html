@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zeek Log Format &mdash; Zeek Documenation 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Zeek Documenation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Zeek Log Format</a></li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Zeek Documenation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Zeek Log Format</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/command.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zeek-log-format">
+<h1>Zeek Log Format<a class="headerlink" href="#zeek-log-format" title="Link to this heading"></a></h1>
+<ol class="arabic">
+<li><p><strong>Creating a Directory for Zeek</strong></p>
+<p>To set up Zeek, create a directory for it:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/temp/
+$<span class="w"> </span>mkdir<span class="w"> </span>zeek
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>zeek
+</pre></div>
+</div>
+<p>Here, navigate to the <code class="docutils literal notranslate"><span class="pre">/temp/</span></code> directory, create a new directory named <code class="docutils literal notranslate"><span class="pre">zeek</span></code>, and move into it.</p>
+</li>
+<li><p><strong>Defining Path and Analyzing PCAP Files with Zeek</strong></p>
+<p>Use Zeek to analyze a Packet Capture (PCAP) file:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>/opt/zeek/bin/zeek<span class="w"> </span>-r<span class="w"> </span>~/downloads/file.pcap
+</pre></div>
+</div>
+<p>This command parses network traffic in the PCAP file (<code class="docutils literal notranslate"><span class="pre">file.pcap</span></code>) located in the <code class="docutils literal notranslate"><span class="pre">~/downloads/</span></code> directory, generating various log files for analysis.</p>
+</li>
+<li><p><strong>Understanding Generated Log Files</strong></p>
+<p>After running Zeek, several log files are generated:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">conn.log</span></code>: Contains connection records detailing source and destination IP addresses, ports, and protocols.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dns.log</span></code>: Logs DNS requests, providing insight into DNS query activity.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">files.log</span></code>: Lists files transferred over the network.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http.log</span></code>: Records HTTP transactions, including requests and responses.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pe.log</span></code>: Logs portable executable (PE) files encountered in network traffic.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ssl.log</span></code> and <code class="docutils literal notranslate"><span class="pre">x509.log</span></code>: Provide information about TLS/SSL connections and X.509 certificates.</p></li>
+</ul>
+</li>
+<li><p><strong>Viewing Logs</strong></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">less</span></code> to view logs without line wrapping:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>less<span class="w"> </span>-S<span class="w"> </span>conn.log
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-S</span></code> flag in <code class="docutils literal notranslate"><span class="pre">less</span></code> prevents line wrapping, making logs easier to read.</p>
+</li>
+<li><p><strong>Extracting Information from DNS Logs</strong></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">zeek-cut</span></code> to extract specific fields from DNS logs:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cat<span class="w"> </span>dns.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>/opt/zeek/bin/zeek-cut<span class="w"> </span>query
+</pre></div>
+</div>
+<p>This command extracts the <code class="docutils literal notranslate"><span class="pre">query</span></code> field from the <code class="docutils literal notranslate"><span class="pre">dns.log</span></code> file, displaying DNS queries.</p>
+</li>
+<li><p><strong>Counting Unique DNS Queries</strong></p>
+<p>Count unique DNS queries using a pipeline:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cat<span class="w"> </span>dns.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>/opt/zeek/bin/zeek-cut<span class="w"> </span>query<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-n
+</pre></div>
+</div>
+<p>This pipeline counts occurrences of each unique DNS query, sorting them alphabetically and numerically.</p>
+</li>
+<li><p><strong>Searching for Specific IDs</strong></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">fgrep</span></code> to search for specific IDs across all log files:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fgrep<span class="w"> </span><span class="o">(</span>id<span class="o">)</span><span class="w"> </span>*.log
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">(id)</span></code> with the ID you’re searching for.</p>
+</li>
+<li><p><strong>Analyzing HTTP Logs</strong></p>
+<p>HTTP logs (<code class="docutils literal notranslate"><span class="pre">http.log</span></code>) record HTTP transactions, including requests and responses. They provide valuable insights into web traffic, including URLs accessed, user-agents, and response codes.</p>
+</li>
+<li><p><strong>Analyzing SSL/TLS Logs</strong></p>
+<p>SSL/TLS logs (<code class="docutils literal notranslate"><span class="pre">ssl.log</span></code>) and X.509 certificate logs (<code class="docutils literal notranslate"><span class="pre">x509.log</span></code>) provide information about encrypted connections, including cipher suites, certificate chains, and expiration dates. They are crucial for monitoring secure communications and detecting potential security issues.</p>
+</li>
+<li><p><strong>Analyzing File Logs</strong></p></li>
+</ol>
+<blockquote>
+<div><p>File logs (<code class="docutils literal notranslate"><span class="pre">files.log</span></code>) list files transferred over the network, including their paths, sizes, and hashes. They are useful for tracking file transfers and identifying potentially malicious files.</p>
+</div></blockquote>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Laiba Waseem.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analyzing Traffic with Zeek Sensor &mdash; Zeek Documenation 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Zeek Documenation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Analyzing Traffic with Zeek Sensor</a></li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Zeek Documenation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Analyzing Traffic with Zeek Sensor</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/lab2.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="analyzing-traffic-with-zeek-sensor">
+<h1>Analyzing Traffic with Zeek Sensor<a class="headerlink" href="#analyzing-traffic-with-zeek-sensor" title="Link to this heading"></a></h1>
+<p>In this lab, we will be running the Zeek sensor to analyze network traffic and gain a better understanding of what is happening in the network environment.</p>
+<p>To analyze network traffic using Zeek on your current device, follow these steps:</p>
+<ol class="arabic">
+<li><p><strong>Change Privileges</strong>:</p>
+<p>First, switch to the root user to ensure you have the necessary permissions.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-s
+</pre></div>
+</div>
+</li>
+<li><p><strong>Navigate to Zeek Directory</strong>:</p>
+<p>Change your directory to where Zeek is installed.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/opt/zeek/bin
+</pre></div>
+</div>
+</li>
+<li><p><strong>Start Zeek Control</strong>:</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">zeekctl</span></code> command to open Zeek Control and start the Zeek processes.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./zeekctl
+</pre></div>
+</div>
+<p>Zeek Control will open, and you can start and manage Zeek from there.</p>
+<img alt="Zeek Control Interface" src="../_images/Screenshot-4.png" />
+<p>By following these steps, you will have Zeek running on your system, ready to capture and analyze network traffic. This setup is essential for monitoring your network and detecting any suspicious activities or threats.</p>
+</li>
+<li><p><strong>Stopping Zeek Control</strong>:</p>
+<p>Once you have collected enough data or completed your analysis, you can stop Zeek Control using the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./zeekctl<span class="w"> </span>stop
+</pre></div>
+</div>
+<p>After stopping Zeek Control, navigate to the logs directory to check your latest log files. Reviewing these logs is crucial to understanding the network activity and identifying any potential anomalies.</p>
+</li>
+<li><p><strong>Viewing Log Files</strong>:</p>
+<p>To view the generated log files, you can use the <code class="docutils literal notranslate"><span class="pre">less</span></code> command. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>less<span class="w"> </span>-S<span class="w"> </span>conn.log
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">conn.log</span></code> with the name of the log file you want to inspect. Using the <code class="docutils literal notranslate"><span class="pre">-S</span></code> option with <code class="docutils literal notranslate"><span class="pre">less</span></code> allows you to scroll horizontally, making it easier to view the log file’s content.</p>
+<img alt="Viewing Zeek Log Files" src="../_images/Screenshot-1.png" />
+<p>Open each log file one by one to examine the details. Pay close attention to any anomalies or unusual patterns in the traffic. Zeek’s logs provide comprehensive information, including connection details, HTTP requests, DNS queries, and more.</p>
+</li>
+<li><p><strong>Identifying Anomalies</strong>:</p>
+<p>Analyzing the logs will help you identify any suspicious activities or anomalies. Look for unusual patterns, unexpected connections, or any deviations from normal network behavior. These could indicate potential security threats or malicious activities.</p>
+</li>
+</ol>
+<p>By following these steps and thoroughly analyzing the log files, you can effectively monitor your network and detect any suspicious activities. Regular analysis of network traffic with Zeek helps maintain a secure and resilient network environment.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Laiba Waseem.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

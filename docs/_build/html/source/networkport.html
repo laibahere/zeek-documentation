@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connecting Zeek to an Entire Network &mdash; Zeek Documenation 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Zeek Documenation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Connecting Zeek to an Entire Network</a></li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Zeek Documenation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Connecting Zeek to an Entire Network</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/networkport.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="connecting-zeek-to-an-entire-network">
+<h1>Connecting Zeek to an Entire Network<a class="headerlink" href="#connecting-zeek-to-an-entire-network" title="Link to this heading"></a></h1>
+<p>Imagine you’re managing a busy office network with dozens of devices, including computers, printers, and smartphones. You want to make sure you know what’s happening across your entire network and be alerted if any threats arise. Zeek is a powerful tool that can help you achieve this.</p>
+<p>Here’s a step-by-step guide to setting up Zeek to monitor all network traffic.</p>
+<ol class="arabic simple">
+<li><p>Network Setup</p></li>
+</ol>
+<blockquote>
+<div><p><strong>Network Tap</strong></p>
+</div></blockquote>
+<p>A network tap is a hardware device that provides a way to access data flowing across a network. It is installed between network devices, creating a copy of the data for monitoring purposes.</p>
+<p><strong>How it works:</strong></p>
+<ol class="arabic simple">
+<li><p>Connect the tap to the network segment you want to monitor.</p></li>
+<li><p>Connect the monitoring port of the tap to the Zeek server’s network interface.</p></li>
+</ol>
+<p><strong>Switch Port Mirroring (SPAN Port)</strong></p>
+<p>Configure a switch port as a SPAN (Switched Port Analyzer) port to mirror traffic from one or more ports or VLANs.</p>
+<p><strong>How it works:</strong></p>
+<ol class="arabic simple">
+<li><p>Configure the SPAN port on the switch to mirror the desired traffic.</p></li>
+<li><p>Connect the SPAN port to the Zeek server’s network interface.</p></li>
+</ol>
+<p><strong>Inline Deployment</strong></p>
+<p>Place the Zeek server inline between network segments. This setup requires two network interfaces on the Zeek server, each connecting to one segment of the network.</p>
+<ol class="arabic simple" start="2">
+<li><p>Install Zeek</p></li>
+</ol>
+<p><strong>On a Unix-like system (e.g., Linux):</strong></p>
+<ol class="arabic">
+<li><p><strong>Install dependencies:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">update</span></code>
+<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">cmake</span> <span class="pre">make</span> <span class="pre">gcc</span> <span class="pre">g++</span> <span class="pre">flex</span> <span class="pre">bison</span> <span class="pre">libpcap-dev</span> <span class="pre">libssl-dev</span> <span class="pre">python3-dev</span> <span class="pre">swig</span> <span class="pre">zlib1g-dev</span></code></p>
+</li>
+<li><p><strong>Download and extract Zeek:</strong></p>
+<dl>
+<dt>`` &gt;&gt;&gt;wget <a class="reference external" href="https://download.zeek.org/zeek">https://download.zeek.org/zeek</a>-&lt;version&gt;.tar.gz``</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tar</span> <span class="o">-</span><span class="n">xzf</span> <span class="n">zeek</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cd</span> <span class="n">zeek</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a></p>
+</li>
+<li><p><strong>Compile and install Zeek:</strong></p></li>
+</ol>
+<blockquote>
+<div><dl>
+<dt><a href="#id3"><span class="problematic" id="id4">``</span></a>&gt;&gt;&gt;./configure</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">make</span>
+<span class="go">&gt;&gt;&gt;sudo make install</span>
+<span class="go">``</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>Configure Zeek</p></li>
+</ol>
+<ol class="arabic">
+<li><p><strong>Network Interface Configuration:</strong></p>
+<p>Edit the <strong>node.cfg</strong> file (usually located in <code class="docutils literal notranslate"><span class="pre">/usr/local/zeek/etc/</span></code>) to specify the network interface that Zeek should use for monitoring. Example:</p>
+<p><a href="#id5"><span class="problematic" id="id6">``</span></a>cfg
+[zeek]
+type=standalone
+host=localhost
+interface=eth0
+``</p>
+</li>
+<li><p><strong>Local Configuration:</strong></p>
+<p>Edit the <code class="docutils literal notranslate"><span class="pre">local.zeek</span></code> file to enable or customize specific scripts and logging options. This file is typically in <code class="docutils literal notranslate"><span class="pre">/usr/local/zeek/share/zeek/site/</span></code>. Example:</p>
+<p><a href="#id7"><span class="problematic" id="id8">``</span></a>sh
+&#64;load policy/tuning/logs-to-stdout.zeek
+``</p>
+</li>
+</ol>
+<ol class="arabic simple" start="4">
+<li><p>Start Zeek</p></li>
+</ol>
+<p>To start Zeek, use the following command:
+<a href="#id9"><span class="problematic" id="id10">``</span></a>sh
+sudo zeekctl deploy
+``</p>
+<p>This command initializes Zeek and starts monitoring traffic on the specified network interface.</p>
+<ol class="arabic simple" start="5">
+<li><p>Verify Zeek is Running</p></li>
+</ol>
+<p>Check the status of Zeek to ensure it’s running correctly:
+<a href="#id11"><span class="problematic" id="id12">``</span></a>sh
+sudo zeekctl status
+``</p>
+<ol class="arabic simple" start="6">
+<li><p>Analyze Logs</p></li>
+</ol>
+<p>Zeek logs traffic data in various log files located in the <cite>logs</cite> directory (usually <cite>/usr/local/zeek/logs/</cite>). Common logs include:
+- <code class="docutils literal notranslate"><span class="pre">conn.log</span></code> for connection summaries.
+- <code class="docutils literal notranslate"><span class="pre">http.log</span></code> for HTTP traffic.
+- <code class="docutils literal notranslate"><span class="pre">dns.log</span></code> for DNS queries.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Laiba Waseem.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

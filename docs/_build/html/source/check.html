@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Zeek Documenation 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2709fde1"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Zeek Documenation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
+<li><a class="reference internal" href="#advanced-usage">Advanced Usage</a><ul>
+<li><a class="reference internal" href="#details">Details</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#specific-details">Specific Details</a><ul>
+<li><a class="reference internal" href="#more-information">More Information</a><ul>
+<li><a class="reference internal" href="#further-reading">Further Reading</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Zeek Documenation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/check.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>Sphinx, a documentation generator for Python projects, uses reStructuredText (reST) for formatting documentation. Headings in reStructuredText are indicated by the adornment (i.e., the characters underlining or overlining the heading text). Here are the common styles for Sphinx headings:</p>
+<p>### Section Titles
+1. <strong>Title</strong></p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">Title</span>
+<span class="pre">=====</span>
+<span class="pre">`</span></code></p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><strong>Chapter</strong>
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">Chapter</span>
+<span class="pre">-------</span>
+<span class="pre">`</span></code></p></li>
+<li><p><strong>Subchapter</strong>
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">Subchapter</span>
+<span class="pre">~~~~~~~~~~</span>
+<span class="pre">`</span></code></p></li>
+<li><p><strong>Section</strong>
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">Section</span>
+<span class="pre">^^^^^^^</span>
+<span class="pre">`</span></code></p></li>
+<li><p><strong>Subsection</strong>
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">Subsection</span>
+<span class="pre">**********</span>
+<span class="pre">`</span></code></p></li>
+<li><p><strong>Subsubsection</strong>
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">Subsubsection</span>
+<span class="pre">+++++++++++++</span>
+<span class="pre">`</span></code></p></li>
+<li><p><strong>Paragraph</strong>
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">Paragraph</span>
+<span class="pre">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
+<span class="pre">`</span></code></p></li>
+<li><p><strong>Subparagraph</strong>
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">Subparagraph</span>
+<span class="pre">............</span>
+<span class="pre">`</span></code></p></li>
+</ol>
+<p>### Example
+Here’s an example showing different heading levels in a reStructuredText file:
+<a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>rst
+My Documentation
+================</p>
+<section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<p>This is the introduction section.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+</section>
+</section>
+<section id="basic-usage">
+<h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading"></a></h1>
+<p>This section explains how to use the project.</p>
+</section>
+<section id="advanced-usage">
+<h1>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Link to this heading"></a></h1>
+<p>This section explains advanced usage techniques.</p>
+<section id="details">
+<h2>Details<a class="headerlink" href="#details" title="Link to this heading"></a></h2>
+</section>
+</section>
+<section id="specific-details">
+<h1>Specific Details<a class="headerlink" href="#specific-details" title="Link to this heading"></a></h1>
+<p>Here are specific details about the project.</p>
+<section id="more-information">
+<h2>More Information<a class="headerlink" href="#more-information" title="Link to this heading"></a></h2>
+<section id="further-reading">
+<h3>Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading"></a></h3>
+<p>Refer to additional resources for more information.
+<a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+<p>In Sphinx documentation, the hierarchy of the headings should be consistent throughout the document to ensure proper structure and readability.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Laiba Waseem.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

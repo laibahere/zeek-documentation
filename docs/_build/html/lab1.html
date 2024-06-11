@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analyzing Offline PCAP Files with Zeek &mdash; Zeek Documenation 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Analyzing Traffic with Zeek Sensor" href="lab2.html" />
+    <link rel="prev" title="Connecting Zeek to an Entire Network" href="networkport.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Zeek Documenation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Zeek Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command.html">Zeek Log Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zeeklogs.html">Zeek Logs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="networkport.html">Connecting Zeek to an Entire Network</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Labs:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Analyzing Offline PCAP Files with Zeek</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preparing-the-environment">Preparing the Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-zeek-on-the-pcap-file">Running Zeek on the PCAP File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zeek-s-role-in-threat-analysis">Zeek’s Role in Threat Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#viewing-and-interpreting-logs">Viewing and Interpreting Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#analyzing-logs-for-anomalies">Analyzing Logs for Anomalies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lab2.html">Analyzing Traffic with Zeek Sensor</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zeek Documenation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Analyzing Offline PCAP Files with Zeek</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/lab1.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="analyzing-offline-pcap-files-with-zeek">
+<h1>Analyzing Offline PCAP Files with Zeek<a class="headerlink" href="#analyzing-offline-pcap-files-with-zeek" title="Link to this heading"></a></h1>
+<p>This lab guides you through the process of opening and analyzing offline PCAP files using Zeek, a powerful network security monitoring tool. You will learn how to download a PCAP file, set up a temporary analysis environment, and interpret the resulting logs.</p>
+<section id="preparing-the-environment">
+<h2>Preparing the Environment<a class="headerlink" href="#preparing-the-environment" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Download a PCAP File</strong>:</p>
+<p>To start, download a PCAP file from a network traffic analysis resource such as the Malware Traffic Analysis website. These files capture network packets that can be used for offline analysis.</p>
+<img alt="_images/image1.gif" src="_images/image1.gif" />
+</li>
+<li><p><strong>Unzip the PCAP File</strong>:</p>
+<p>After downloading the PCAP file, unzip it using a suitable tool. This file will be used for offline analysis with Zeek.</p>
+</li>
+<li><p><strong>Create a Temporary Directory</strong>:</p>
+<p>It’s a good practice to create a temporary directory for analysis to keep things organized. Use the following commands to create and navigate to a new folder:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/tmp/
+$<span class="w"> </span>mkdir<span class="w"> </span>zeek
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>zeek
+</pre></div>
+</div>
+</li>
+<li><p><strong>Move the PCAP File</strong>:</p>
+<p>Move the downloaded PCAP file to your newly created directory:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mv<span class="w"> </span>~/Downloads/file.pcap<span class="w"> </span>.
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="running-zeek-on-the-pcap-file">
+<h2>Running Zeek on the PCAP File<a class="headerlink" href="#running-zeek-on-the-pcap-file" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Define Paths and Run Zeek</strong>:</p>
+<p>To analyze the PCAP file with Zeek, you need to specify the path to the Zeek binary and the PCAP file. Use the following command, replacing <code class="docutils literal notranslate"><span class="pre">file.pcap</span></code> with the actual name of your downloaded file:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>/opt/zeek/bin/zeek<span class="w"> </span>-r<span class="w"> </span>file.pcap
+</pre></div>
+</div>
+<img alt="_images/Screenshot-3.png" src="_images/Screenshot-3.png" />
+</li>
+</ol>
+<p>Understanding the Need for PCAP Analysis
+-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+<p>Analyzing PCAP files from different networks is crucial for several reasons:</p>
+<ul class="simple">
+<li><p><strong>Verification of Alerts</strong>: After monitoring traffic and identifying alerts, it is essential to verify whether these alerts are false positives or true positives. This verification process often involves detailed traffic analysis.</p></li>
+<li><p><strong>Threat Analysis</strong>: Sending PCAP files to threat analyzers helps in a thorough investigation of potential threats. Tools like Zeek are invaluable for this purpose as they provide detailed insights into the network traffic.</p></li>
+</ul>
+</section>
+<section id="zeek-s-role-in-threat-analysis">
+<h2>Zeek’s Role in Threat Analysis<a class="headerlink" href="#zeek-s-role-in-threat-analysis" title="Link to this heading"></a></h2>
+<p>Zeek is highly regarded for its ability to provide detailed logs and analysis. As an NDR (Network Detection and Response) tool, it excels in transforming raw traffic data into actionable intelligence.</p>
+</section>
+<section id="viewing-and-interpreting-logs">
+<h2>Viewing and Interpreting Logs<a class="headerlink" href="#viewing-and-interpreting-logs" title="Link to this heading"></a></h2>
+<p>After running Zeek, various log files are generated, each providing specific insights into different aspects of the network traffic. Here are examples of some key log files and their typical contents:</p>
+<ol class="arabic">
+<li><p><strong>conn.log</strong>:</p>
+<p>The <cite>conn.log</cite> file records connection summaries. Here is a sample of what this log might look like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fields<span class="w"> </span>ts<span class="w">      </span>uid<span class="w">     </span>id.orig_h<span class="w">       </span>id.orig_p<span class="w">       </span>id.resp_h<span class="w">       </span>id.resp_p<span class="w">       </span>proto<span class="w">   </span>service<span class="w"> </span>duration<span class="w">        </span>orig_bytes<span class="w">    </span>&gt;
+<span class="c1">#types  time    string  addr    port    addr    port    enum    string  interval        count   count   string  bool    bool    count &gt;</span>
+<span class="m">1423419600</span>.819788<span class="w">       </span>CQfQn612S55RjxFl9g<span class="w">      </span><span class="m">172</span>.16.137.40<span class="w">   </span><span class="m">58408</span><span class="w">   </span><span class="m">224</span>.0.0.252<span class="w">     </span><span class="m">5355</span><span class="w">    </span>udp<span class="w">     </span>dns<span class="w">     </span><span class="m">0</span>.097898<span class="w">        </span><span class="m">50</span><span class="w">    </span>&gt;
+<span class="m">1423419600</span>.781778<span class="w">       </span>CRcFzbS4TfYak61aa<span class="w">       </span><span class="m">172</span>.16.137.40<span class="w">   </span><span class="m">68</span><span class="w">      </span><span class="m">172</span>.16.137.1<span class="w">    </span><span class="m">67</span><span class="w">      </span>udp<span class="w">     </span>dhcp<span class="w">    </span>-<span class="w">       </span>-<span class="w">       </span>-<span class="w">     </span>&gt;
+<span class="m">1423419600</span>.793348<span class="w">       </span>Cxx7Bx1A0LU7ohhlne<span class="w">      </span><span class="m">255</span>.255.255.255<span class="w"> </span><span class="m">68</span><span class="w">      </span><span class="m">172</span>.16.137.1<span class="w">    </span><span class="m">67</span><span class="w">      </span>udp<span class="w">     </span>dhcp<span class="w">    </span>-<span class="w">       </span>-<span class="w">       </span>-<span class="w">     </span>&gt;
+<span class="m">1423419900</span>.853959<span class="w">       </span>CJ6jD43Klex3jeANJ5<span class="w">      </span><span class="m">172</span>.16.137.40<span class="w">   </span><span class="m">58501</span><span class="w">   </span><span class="m">224</span>.0.0.252<span class="w">     </span><span class="m">5355</span><span class="w">    </span>udp<span class="w">     </span>dns<span class="w">     </span><span class="m">0</span>.105265<span class="w">        </span><span class="m">50</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>dhcp.log</strong>:</p>
+<p>The <cite>dhcp.log</cite> file contains DHCP transaction details. Below is an example:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fields<span class="w"> </span>ts<span class="w">      </span>uids<span class="w">    </span>client_addr<span class="w">     </span>server_addr<span class="w">     </span>mac<span class="w">     </span>host_name<span class="w">       </span>client_fqdn<span class="w">     </span>domain<span class="w">  </span>requested_addr<span class="w">  </span>assigned_addr<span class="w"> </span>&gt;<span class="w"> </span>assigned_addr<span class="w">   </span>lease_time<span class="w">      </span>client_message<span class="w">  </span>server_message
+<span class="c1">#types  time    set[string]     addr    addr    string  string  string  string  addr    addr    interval        string  string  vector Mike-PC mshome.net      -       192.168.137.40  604800.000000</span>
+<span class="m">1423419600</span>.781778<span class="w">       </span>CRcFzbS4TfYak61aa,Cxx7Bx1A0LU7ohhlne<span class="w">    </span><span class="m">172</span>.16.137.40<span class="w">   </span><span class="m">172</span>.16.137.1<span class="w">    </span><span class="m">08</span>:00:2b:ef:ab:7c<span class="w">       </span>Mike-PC<span class="w"> </span>Mike-PMike-PC<span class="w"> </span>mshome.net<span class="w">      </span>-<span class="w">       </span><span class="m">192</span>.168.137.40<span class="w">  </span><span class="m">604800</span>.000000&gt;
+<span class="m">1423419900</span>.808118<span class="w">       </span>CZnaaj19D0aQUbfGFh,Csb4f01IRRISWbXUOg<span class="w">   </span><span class="m">172</span>.16.137.40<span class="w">   </span><span class="m">172</span>.16.137.1<span class="w">    </span><span class="m">08</span>:00:2b:ef:ab:7c<span class="w">       </span>Mike-PC<span class="w"> </span>Mike-PMike-PC<span class="w"> </span>mshome.net<span class="w">      </span>-<span class="w">       </span><span class="m">192</span>.168.137.40<span class="w">  </span><span class="m">604800</span>.000000&gt;
+<span class="m">1423420200</span>.849432<span class="w">       </span>CVwUmp4Kijfstuf06k,CwY5OgZ02ASY1eMO8<span class="w">    </span><span class="m">172</span>.16.137.40<span class="w">   </span><span class="m">172</span>.16.137.1<span class="w">    </span><span class="m">08</span>:00:2b:ef:ab:7c<span class="w">       </span>Mike-PC<span class="w"> </span>Mike-P&gt;
+<span class="m">1423420334</span>.594108<span class="w">       </span>Chd2UD2lbPX5uPnfga,CjZoYl4e3cumXqxVFc<span class="w">   </span><span class="m">172</span>.16.137.40<span class="w">   </span>-<span class="w">       </span><span class="m">08</span>:00:2b:ef:ab:7c<span class="w">       </span>Mike-PC<span class="w"> </span>-<span class="w">       </span>m<span class="w">      </span>-<span class="w">       </span><span class="m">192</span>.168.137.40<span class="w">  </span><span class="m">604800</span>.000000
+</pre></div>
+</div>
+</li>
+<li><p><strong>dns.log</strong>:</p>
+<p>The <cite>dns.log</cite> file logs DNS queries and responses. Here is an example entry:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#fields ts      uid     id.orig_h       id.orig_p       id.resp_h       id.resp_p       proto   trans_id        rtt     query   qclass  qclas&gt;</span>
+<span class="c1">#types  time    string  addr    port    addr    port    enum    count   interval        string  count   string  count   string  count   strin&gt;</span>
+<span class="m">1423419600</span>.819788<span class="w">       </span>CQfQn612S55RjxFl9g<span class="w">      </span><span class="m">172</span>.16.137.40<span class="w">   </span><span class="m">58408</span><span class="w">   </span><span class="m">224</span>.0.0.252<span class="w">     </span><span class="m">5355</span><span class="w">    </span>udp<span class="w">     </span><span class="m">49811</span><span class="w">   </span>-<span class="w">       </span>mike-pc<span class="w"> </span><span class="m">1</span><span class="w">       </span>C_INT&gt;
+<span class="m">1423419600</span>.917686<span class="w">       </span>CQfQn612S55RjxFl9g<span class="w">      </span><span class="m">172</span>.16.137.40<span class="w">   </span><span class="m">58408</span><span class="w">   </span><span class="m">224</span>.0.0.252<span class="w">     </span><span class="m">5355</span><span class="w">    </span>udp<span class="w">     </span><span class="m">49811</span><span class="w">   </span>-<span class="w">       </span>mike-pc<span class="w"> </span><span class="m">1</span><span class="w">       </span>C_INT&gt;
+<span class="m">1423419900</span>.853959<span class="w">       </span>CJ6jD43Klex3jeANJ5<span class="w">      </span><span class="m">172</span>.16.137.40<span class="w">   </span><span class="m">58501</span><span class="w">   </span><span class="m">224</span>.0.0.252<span class="w">     </span><span class="m">5355</span><span class="w">    </span>udp<span class="w">     </span><span class="m">227</span><span class="w">     </span>-<span class="w">       </span>mike-pc<span class="w"> </span><span class="m">1</span><span class="w">       </span>C_INT&gt;
+<span class="m">1423419900</span>.959224<span class="w">       </span>CJ6jD43Klex3jeANJ5<span class="w">      </span><span class="m">172</span>.16.137.40<span class="w">   </span><span class="m">58501</span><span class="w">   </span><span class="m">224</span>.0.0.252<span class="w">     </span><span class="m">5355</span><span class="w">    </span>udp<span class="w">     </span><span class="m">227</span><span class="w">     </span>-<span class="w">       </span>mike-pc<span class="w"> </span><span class="m">1</span><span class="w">       </span>C_INT&gt;
+<span class="m">1423420218</span>.437685<span class="w">       </span>C0hLRJuSzI82GwE5b<span class="w">       </span><span class="m">172</span>.16.137.40<span class="w">   </span><span class="m">137</span><span class="w">     </span><span class="m">172</span>.16.137.255<span class="w">  </span><span class="m">137</span><span class="w">     </span>udp<span class="w">     </span><span class="m">33940</span><span class="w">   </span>-<span class="w">       </span>MIKE-PC<span class="w"> </span><span class="m">1</span><span class="w">       </span>C_INT&gt;
+</pre></div>
+</div>
+</li>
+<li><p><strong>http.log</strong>:</p>
+<p>The <cite>http.log</cite> file contains HTTP request and response details. Here is a sample:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>id.resp_p<span class="w">       </span>trans_depth<span class="w">     </span>method<span class="w">  </span>host<span class="w">    </span>uri<span class="w">     </span>referrer<span class="w">        </span>version<span class="w"> </span>user_agent<span class="w">      </span>origin<span class="w">  </span>request_body_len<span class="w">        </span>response_bod&gt;
+string<span class="w">  </span>string<span class="w">  </span>string<span class="w">  </span>string<span class="w">  </span>string<span class="w">  </span>string<span class="w">  </span>count<span class="w">   </span>count<span class="w">   </span>count<span class="w">   </span>string<span class="w">  </span>count<span class="w">   </span>string<span class="w">  </span>set<span class="o">[</span>enum<span class="o">]</span><span class="w">       </span>string<span class="w">  </span>string<span class="w">  </span>s<span class="w"> </span>et<span class="o">[</span>string<span class="o">]</span><span class="w"> </span>&gt;
+<span class="m">216</span>.146.39.70<span class="w">   </span><span class="m">80</span><span class="w">      </span><span class="m">1</span><span class="w">       </span>GET<span class="w">  </span>checkip.dyndns.org<span class="w">      </span>/<span class="w">       </span>-<span class="w">       </span><span class="m">1</span>.1<span class="w">     </span>Mozilla/5.0<span class="w">     </span>-<span class="w">       </span><span class="m">0</span><span class="w">       </span><span class="m">104</span><span class="w">     </span><span class="m">200</span><span class="w">     </span>OK<span class="w">  </span>&gt;
+<span class="w">     </span><span class="m">71</span>.18.62.202<span class="w">    </span><span class="m">80</span><span class="w">      </span><span class="m">1</span><span class="w">       </span>GET<span class="w">     </span>cwvancouver.com<span class="w"> </span>/cp/images/digits/arrowu.jpg<span class="w">    </span>-<span class="w">       </span><span class="m">1</span>.1<span class="w">     </span>Mozilla/5.0<span class="w">     </span>-<span class="w">       </span><span class="m">0</span><span class="w">       </span><span class="m">4338</span>&gt;
+<span class="m">192</span>.185.35.92<span class="w">   </span><span class="m">80</span><span class="w">      </span><span class="m">1</span><span class="w">       </span>GET<span class="w">     </span>harveyouellet.com<span class="w">       </span>/TOXICOUSTIQUE/arrowu.jpg<span class="w">       </span>-<span class="w">       </span>-<span class="w">       </span>Mozilla/5.0<span class="w">     </span>-<span class="w">       </span><span class="m">0</span><span class="w">   </span>&gt;
+<span class="m">192</span>.185.35.92<span class="w">   </span><span class="m">80</span><span class="w">      </span><span class="m">1</span><span class="w">       </span>GET<span class="w">     </span>harveyouellet.com<span class="w">       </span>/TOXICOUSTIQUE/arrowu.jpg<span class="w">       </span>-<span class="w">       </span>-<span class="w">       </span>Mozilla/5.0<span class="w">     </span>-<span class="w">       </span><span class="m">0</span><span class="w">   </span>&gt;
+<span class="m">192</span>.185.35.92<span class="w">   </span><span class="m">80</span><span class="w">      </span><span class="m">1</span><span class="w">       </span>GET<span class="w">     </span>harveyouellet.com<span class="w">       </span>/TOXICOUSTIQUE/arrowu.jpg<span class="w">       </span>-<span class="w">       </span>-<span class="w">       </span>Mozilla/5.0<span class="w">     </span>-
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="analyzing-logs-for-anomalies">
+<h2>Analyzing Logs for Anomalies<a class="headerlink" href="#analyzing-logs-for-anomalies" title="Link to this heading"></a></h2>
+<p>Zeek logs provide a wealth of information about network traffic, which can be analyzed to detect anomalies and potential security threats. Here are some key steps and tips for analyzing Zeek logs:</p>
+<ol class="arabic">
+<li><p><strong>Identify Suspicious Connections</strong>:</p>
+<p>Look for unusual IP addresses, ports, or protocols in the <cite>conn.log</cite>. Connections with high durations or large data transfers can also be indicators of suspicious activity.</p>
+</li>
+<li><p><strong>Analyze DNS Queries</strong>:</p>
+<p>Review the <cite>dns.log</cite> for unexpected or frequent queries to unknown domains. Pay special attention to requests for domains with unusual TLDs (Top-Level Domains) or those associated with known threats.</p>
+</li>
+<li><p><strong>Examine HTTP Traffic</strong>:</p>
+<p>In the <cite>http.log</cite>, check the <cite>user_agent</cite> field for uncommon or spoofed user agents. Look at the <cite>uri</cite> field for suspicious paths or filenames, and the <cite>host</cite> field for potentially malicious domains.</p>
+</li>
+<li><p><strong>Correlate Across Logs</strong>:</p>
+<p>Correlating data from different logs (e.g., <cite>conn.log</cite>, <cite>dns.log</cite>, and <cite>http.log</cite>) can help identify patterns of malicious behavior that might not be obvious from a single log. For instance, a suspicious DNS query followed by an HTTP request to the queried domain could indicate a malicious download.</p>
+</li>
+<li><p><strong>Automate Analysis</strong>:</p>
+<p>Consider using automated tools and scripts to parse and analyze Zeek logs. This can help in quickly identifying anomalies and reducing the time required for manual analysis.</p>
+</li>
+</ol>
+<section id="conclusion">
+<h3>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h3>
+<p>This lab provided a step-by-step guide to analyzing offline PCAP files with Zeek. By downloading a PCAP file, setting up a temporary analysis environment, and interpreting the resulting logs, you have gained practical experience in using Zeek for network traffic analysis. Understanding how to analyze Zeek logs is crucial for network security monitoring and threat detection.</p>
+<p>For further reading and advanced techniques, refer to Zeek’s official documentation and community resources.</p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.zeek.org/en/stable/">Zeek Documentation</a></p></li>
+<li><p><cite>Malware Traffic Analysis &lt;http://malware-traffic-analysis.net/&gt;</cite></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="networkport.html" class="btn btn-neutral float-left" title="Connecting Zeek to an Entire Network" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lab2.html" class="btn btn-neutral float-right" title="Analyzing Traffic with Zeek Sensor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Laiba Waseem.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
