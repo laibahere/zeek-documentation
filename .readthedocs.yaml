@@ -18,7 +18,8 @@ sphinx:
 # to build your documentation
 python:
   install:
-    sphinx: "7.3.7"
-    sphinx_rtd_theme: "2.0.0"
+    - sphinx==7.3.7
+    - sphinx_rtd_theme==2.0.0
+
 
 
