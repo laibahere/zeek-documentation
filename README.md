@@ -27,12 +27,17 @@ Make sure you have installed:
     pip install sphinx sphinx-rtd-theme
     ```
 
-3. **Build the documentation**:
+3. **Run Virtual Environment**: 
+    ```bash 
+     source zeekrenv/bin/activate
+    ```
+
+4. **Build the documentation**:
     ```bash
     make html
     ```
 
-4. **Open the documentation**:
+5. **Open the documentation**:
     - On macOS:
         ```bash
         open _build/html/index.html
