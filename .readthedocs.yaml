@@ -1,6 +1,6 @@
 # Read the Docs configuration file for Sphinx projects
 # See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
-version: 2
+version: 0.1
 
 # Build all formats
 formats: all
@@ -20,6 +20,5 @@ sphinx:
 # to build your documentation
 python:
   install:
-    - sphinx==7.3.7
-    - sphinx_rtd_theme==2.0.0
+    - requirements: docs/requirements.txt
 
