@@ -66,17 +66,12 @@ Want to help? Follow these steps:
     ```
 6. **Create a Pull Request**.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
 Questions? Reach out via:
 
 - **Email**: laibawaseem006@gmail.com
-- **GitHub Issues**: [Create an issue](https://github.com/laibahere/zeekdocumentation/issues)
-
 ---
 
 Thank you for using Zeek Documentation! We hope it helps you in your projects.
