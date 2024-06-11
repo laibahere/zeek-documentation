@@ -1,6 +1,6 @@
 # Zeek Documentation
 
-Welcome to the Zeek Documentation project! This project aims to provide comprehensive documentation for Zeek using Sphinx.This documentation is created for the National Center for Cybersecurity (NCCS) at NED to assist users in understanding and utilizing Zeek.
+Welcome to the Zeek Documentation project! This project aims to provide comprehensive documentation for Zeek using Sphinx. This documentation is created for the National Center for Cybersecurity (NCCS) at NED to assist users in understanding and utilizing Zeek.
 
 ## View Documentation Locally
 
@@ -18,13 +18,13 @@ Make sure you have installed:
 
 1. **Clone the repository**:
     ```bash
-    git clonehhttps://github.com/laibahere/zeek-documentation
-    cd zeekdocumentation
+    git clone https://github.com/laibahere/zeek-documentation.git
+    cd zeek-documentation
     ```
 
 2. **Install the required packages**:
     ```bash
-    pip install sphinx-rtd-theme
+    pip install sphinx sphinx-rtd-theme
     ```
 
 3. **Build the documentation**:
@@ -66,12 +66,13 @@ Want to help? Follow these steps:
     ```
 6. **Create a Pull Request**.
 
-
 ## Contact
 
 Questions? Reach out via:
 
 - **Email**: laibawaseem006@gmail.com
+
 ---
 
 Thank you for using Zeek Documentation! We hope it helps you in your projects.
+```
