@@ -12,6 +12,7 @@ Make sure you have installed:
 
 - [Python](https://www.python.org/downloads/)
 - [pip](https://pip.pypa.io/en/stable/installation/)
+- [Sphinx](https://www.sphinx-doc.org/en/master/usage/installation.html)
 
 ### Steps
 
@@ -23,7 +24,7 @@ Make sure you have installed:
 
 2. **Install the required packages**:
     ```bash
-    pip install -r requirements.txt
+    pip install sphinx-rtd-theme
     ```
 
 3. **Build the documentation**:
