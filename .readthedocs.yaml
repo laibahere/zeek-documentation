@@ -10,6 +10,9 @@ build:
   os: ubuntu-22.04
   python:
     version: 3.12
+   tools:
+    python: "3.8"  # This is redundant but can be left for clarity
+    make: "4.3"  # Example tool, you can add more as needed
 
 # Build documentation in the "docs/" directory with Sphinx
 sphinx:
